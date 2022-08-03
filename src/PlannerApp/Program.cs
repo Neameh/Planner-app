@@ -16,6 +16,7 @@ builder.Services.AddHttpClient("PlannerApp.api", client =>
 ).AddHttpMessageHandler<AuthorizationMesssageHandler>();
 
 builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("PlannerApp.api"));
+
 builder.Services.AddTransient<AuthorizationMesssageHandler>();
 builder.Services.AddMudServices();
 builder.Services.AddBlazoredLocalStorage();
