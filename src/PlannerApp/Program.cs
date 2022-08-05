@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using PlannerApp;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
+using PlannerApp.Client.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -20,6 +21,8 @@ builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClien
 builder.Services.AddTransient<AuthorizationMesssageHandler>();
 builder.Services.AddMudServices();
 builder.Services.AddBlazoredLocalStorage();
+
+builder.Services.AddHttpClientServices();
 
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider,JwtAuthenticationStateProvider>();

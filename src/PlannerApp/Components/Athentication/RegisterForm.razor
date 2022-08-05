@@ -1,0 +1,40 @@
+﻿@namespace PlannerApp.Components
+
+<EditForm Model="_model" OnValidSubmit="RegisterUserAsync">
+    <FluentValidationValidator />
+
+    <MudCard>
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h6">Welcome To Planner App</MudText>
+                <MudText Typo="Typo.body2">Create New Account</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
+
+        <MudCardContent>
+            <MudTextField Label="Email" HelperText="Required" @bind-Value="_model.Email" />
+            <MudTextField Label="First Name" HelperText="Required" @bind-Value="_model.FirstName" />
+            <MudTextField Label="Last Name" HelperText="Required" @bind-Value="_model.LastName" />
+
+            <MudTextField Label="Passwor" HelperText="Required" @bind-Value="_model.Password" />
+            <MudTextField Label="Confirm Password" HelperText="Required" @bind-Value="_model.ConfirmPassword" />
+
+            @if (!string.IsNullOrEmpty(_errorMessage))
+            {
+                <MudAlert Severity="Severity.Error">@_errorMessage</MudAlert>
+            }
+        </MudCardContent>
+        <ValidationSummary />
+
+        <MudCardActions>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="_isBusy">Create Account</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Outlined" Color="Color.Secondary" Class="ml-1" Disabled="_isBusy" OnClick="RedirectToLogin">Login</MudButton>
+        </MudCardActions>
+
+    </MudCard>
+
+
+
+</EditForm>
+
+
