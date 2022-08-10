@@ -8,7 +8,7 @@ namespace PlannerApp.Shared.Models
 {
     public class PlanSummary
     {
-        public int id { get; set; }
+        public string id { get; set; }
         public string title { get; set; }
         public string Description { get; set; }
         public string CoverUrl { get; set; }

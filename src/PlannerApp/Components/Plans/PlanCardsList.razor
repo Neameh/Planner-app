@@ -1,0 +1,56 @@
+﻿@namespace PlannerApp.Components
+
+<MudPaper Class="py-1 px-2">
+    <div class="d-flex">
+        <MudTextField @bind-Value="_query" Variant="Variant.Outlined"></MudTextField>
+        <MudIconButton Color="Color.Primary" Icon="@Icons.Filled.Search" OnClick="async ()=> await GetPlans(1)"></MudIconButton>
+    </div>
+</MudPaper>
+
+<MudDivider Class="my-4"></MudDivider>
+@if (_isBusy)
+{
+    <MudGrid Spacing="2">
+        <MudItem sm="12" md="6" lg="4">
+            <MudCard>
+                <MudSkeleton SkeletonType="SkeletonType.Rectangle" Height="200px" />
+                <MudCardContent>
+                    <MudSkeleton Width="30%" Height="42px;" />
+                    <MudSkeleton Width="80%" />
+                    <MudSkeleton Width="100%" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudSkeleton Width="64px" Height="40px" Class="ml-2" />
+                    <MudSkeleton Width="105px" Height="40px" Class="ml-3" />
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+}
+else
+{
+    <MudGrid Spacing="2">
+        @if (_result != null && _result.Records != null)
+        {
+            foreach (var plan in _result.Records)
+            {
+                <MudItem sm="12" md="6" lg="4">
+                    <PlanCard PlanSummary="plan"> </PlanCard>
+                </MudItem>
+            }
+        }
+
+    </MudGrid>
+}
+
+<div class="d-flex justify-center flex-grow-1 gap-4">
+    @for (int i = 0; i < _result.TotalPages; i++)
+    {
+        int index = i;
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-1"
+        OnClick="async () => await GetPlans(index)" Disabled="@(_pageNumber==index)">@index</MudButton>
+    }
+</div>
+
+
+

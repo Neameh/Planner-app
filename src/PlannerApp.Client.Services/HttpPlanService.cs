@@ -19,9 +19,9 @@ namespace PlannerApp.Client.Services
             _httpClient = httpClient;
         }
 
-        public async Task<ApiResponse<PagedList<PlanSummary>>> GetPlanSync(string query = null, int PageNumber = 1, int PageSize = 10)
+        public async Task<ApiResponse<PagedList<PlanSummary>>> GetPlanSync(string query = null, int pageNumber = 1, int pageSize = 10)
         {
-            var Response = await _httpClient.GetAsync($"/api/v2/Plans?query={query}&PageNumber={PageNumber}&PageSize={PageSize}");
+            var Response = await _httpClient.GetAsync($"/api/v2/plans?query={query}&pageNumber={pageNumber}&pageSize={pageSize}");
             if(Response.IsSuccessStatusCode)
             {
                 var result = await Response.Content.ReadFromJsonAsync<ApiResponse<PagedList<PlanSummary>>>();

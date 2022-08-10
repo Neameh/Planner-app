@@ -10,6 +10,6 @@ namespace PlannerApp.Client.Services.Interfaces
 {
     public interface  IPlanService
     {
-        Task<ApiResponse<PagedList<PlanSummary>>> GetPlanSync(string query,int PageNumber=1,int PageSize=10);
+        Task<ApiResponse<PagedList<PlanSummary>>> GetPlanSync(string query,int pageNumber=1,int pageSize=10);
     }
 }
