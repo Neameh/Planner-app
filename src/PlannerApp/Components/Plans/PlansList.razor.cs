@@ -37,7 +37,6 @@ namespace PlannerApp.Components
         private string _query = string.Empty;
 
         private List<PlanSummary> _plans = new List<PlanSummary>();
-
         public async Task<PagedList<PlanSummary>> GetPlansAsync(string query = "", int pageNumber = 1 , int pageSize = 10)
         {
             _isBusy = true;
@@ -49,8 +48,6 @@ namespace PlannerApp.Components
                 _pageSize = result.Value.PageSize;
 
                 return result.Value;
-                
-
             }
             catch(ApiException ex)
             {
@@ -64,14 +61,22 @@ namespace PlannerApp.Components
 
             }
             _isBusy = false;
-
             return null;
-  
-
-
         }
+        #region Toggler
+        private bool _isPlansCardView { get; set; } // true ?
 
-        
+        private void SetPlansCardView()
+        {
+            _isPlansCardView = true;
+        }
+        private void SetPlansListView()
+        {
+            _isPlansCardView = false;
+        }
+        #endregion
+
+
 
     }
 }

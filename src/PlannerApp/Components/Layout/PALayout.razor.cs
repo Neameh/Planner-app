@@ -19,22 +19,17 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using PlannerApp.Shared.Components;
 using Blazored.FluentValidation;
-using PlannerApp.Shared.Models;
 
 namespace PlannerApp.Components
 {
-    public partial class PlanCard
+    public partial class PALayout
     {
         [Parameter]
-        public PlanSummary PlanSummary { get; set; } = new();
-
+        public RenderFragment ChildContent { get; set; }
         [Parameter]
-        public EventCallback<PlanSummary> OnViewClicked { get; set; }
+        public string Title { get; set; }
         [Parameter]
-        public EventCallback<PlanSummary> OnEditClicked { get; set; }
-        [Parameter]
-        public EventCallback<PlanSummary> OnDeleteClicked { get; set; }
-
+        public List<BreadcrumbItem> Breadcrumbs { get; set; }
 
     }
 }

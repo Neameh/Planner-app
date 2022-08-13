@@ -1,0 +1,13 @@
+﻿@namespace PlannerApp.Components
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge">
+    <MudText Typo="Typo.h6" Class="py-4">@Title</MudText>
+    <MudBreadcrumbs Items="@Breadcrumbs">
+        <SeparatorTemplate>
+            <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small" />
+        </SeparatorTemplate>
+    </MudBreadcrumbs>
+    @ChildContent
+</MudContainer>
+
+

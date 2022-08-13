@@ -2,8 +2,19 @@
 
 @*UI View Slector ( to Choose between List And Grid Cards ) *@
 
-@*<PlanCardsList FetchPlans="GetPlansAsync"></PlanCardsList>*@
+<MudIconButton Icon="@Icons.Material.Filled.TableView" OnClick="SetPlansCardView" Color="Color.Primary" Disabled="_isPlansCardView"></MudIconButton>
+<MudIconButton Icon="@Icons.Material.Filled.GridView" OnClick="SetPlansListView" Disabled="@(!_isPlansCardView)"></MudIconButton>
 
-<PlansTable/>
+@if(_isPlansCardView)
+{
+    <PlanCardsList FetchPlans="GetPlansAsync"></PlanCardsList>
+}
+else
+{
+    <PlansTable />
+
+}
+
+
 
 

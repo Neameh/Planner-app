@@ -19,22 +19,15 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using PlannerApp.Shared.Components;
 using Blazored.FluentValidation;
-using PlannerApp.Shared.Models;
 
 namespace PlannerApp.Components
 {
-    public partial class PlanCard
+    public partial class Plan
     {
-        [Parameter]
-        public PlanSummary PlanSummary { get; set; } = new();
-
-        [Parameter]
-        public EventCallback<PlanSummary> OnViewClicked { get; set; }
-        [Parameter]
-        public EventCallback<PlanSummary> OnEditClicked { get; set; }
-        [Parameter]
-        public EventCallback<PlanSummary> OnDeleteClicked { get; set; }
-
-
+        private List<BreadcrumbItem> _Breadcrumbs  = new List<BreadcrumbItem>()
+        {
+            new BreadcrumbItem("Home" , "/index"),
+            new BreadcrumbItem("Plans" ,"/plans" , true )
+        };
     }
 }

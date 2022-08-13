@@ -1,39 +1,17 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">PlannerApp</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-    </nav>
-</div>
+<MudNavMenu Rounded="true" Margin="Margin.Normal" Color="Color.Tertiary" Class="pa-2">
+    <MudText Typo="Typo.h6" Class="px-4">Planner App </MudText>
+    <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">by Neameh Karineh</MudText>
+    <MudDivider Class="my-2"></MudDivider>
 
-@code {
-    private bool collapseNavMenu = true;
+    <MudNavLink Href="/" Icon="@Icons.Filled.Dashboard" Match="NavLinkMatch.Prefix">Home</MudNavLink>
+    <MudNavLink Match="NavLinkMatch.Prefix" Href="/plans" Icon="@Icons.Filled.NextPlan">Plans</MudNavLink>
+    <MudNavLink Href="/plans/add" Icon="@Icons.Filled.Add">Add Plan</MudNavLink>
+    <MudNavLink Href="#" Icon="@Icons.Filled.IncompleteCircle">Not Done Items</MudNavLink>
+    <MudNavLink Href="#" Icon="@Icons.Filled.DashboardCustomize">About</MudNavLink>
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+</MudNavMenu>
 
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}
+
+
