@@ -11,5 +11,9 @@ namespace PlannerApp.Client.Services.Interfaces
     public interface  IPlanService
     {
         Task<ApiResponse<PagedList<PlanSummary>>> GetPlanSync(string query,int pageNumber=1,int pageSize=10);
+
+        Task<ApiResponse<PlanDetails>> CreatePlanAsync(PlanDetails model, FormFile coverFile );
+        Task<ApiResponse<PlanDetails>> EditPlanAsync(PlanDetails model, FormFile coverFile);
+
     }
 }

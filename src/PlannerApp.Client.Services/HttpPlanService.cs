@@ -19,6 +19,16 @@ namespace PlannerApp.Client.Services
             _httpClient = httpClient;
         }
 
+        public Task<ApiResponse<PlanDetails>> CreatePlanAsync(PlanDetails model, FormFile coverFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<PlanDetails>> EditPlanAsync(PlanDetails model, FormFile coverFile)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ApiResponse<PagedList<PlanSummary>>> GetPlanSync(string query = null, int pageNumber = 1, int pageSize = 10)
         {
             var Response = await _httpClient.GetAsync($"/api/v2/plans?query={query}&pageNumber={pageNumber}&pageSize={pageSize}");
@@ -32,6 +42,18 @@ namespace PlannerApp.Client.Services
                 var errorResponse = await Response.Content.ReadFromJsonAsync<ApiErrorResponse>();
                 throw new ApiException(errorResponse, Response.StatusCode);
             }
+        }
+        private HttpClient PreparePlanForm(PlanDetails model,FormFile CoverFile , bool isUpdated)
+        {
+            var form = new MultipartFormDataContent();
+            form.Add(new StringContent(model.title), nameof(PlanDetails.title));
+            if (!String.IsNullOrEmpty(model.Description))
+                form.Add(new StringContent(model.Description), nameof(PlanDetails.Description));
+            if (isUpdated)
+                form.Add(new StringContent(model.id), nameof(PlanDetails.id));
+            if (CoverFile != null)
+                form.Add(new StreamContent(CoverFile.FileStream), nameof(CoverFile.FileName));
+            return form;
         }
     }
 }

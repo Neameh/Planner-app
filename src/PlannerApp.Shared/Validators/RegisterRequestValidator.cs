@@ -42,4 +42,22 @@ namespace PlannerApp.Shared.Validators
 
         }
     }
+
+    public class PlanValidator : AbstractValidator<PlanDetails>
+    {
+        public PlanValidator()
+        {
+            RuleFor(p => p.title)
+                .NotEmpty()
+                .WithMessage("Title should not be empty")
+                .MaximumLength(100)
+                .WithMessage("Title must be less than 100 characters");
+            RuleFor(p => p.Description)
+                .NotEmpty()
+                .WithMessage("Description should not be empty")
+                .MaximumLength(500)
+                .WithMessage("Description must be less than 500 characters");
+            
+        }
+    }
 }
