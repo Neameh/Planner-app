@@ -22,12 +22,14 @@ using Blazored.FluentValidation;
 
 namespace PlannerApp.Pages.Plans
 {
-    public partial class Plan
+    public partial class CreateEditPlan
     {
-        private List<BreadcrumbItem> _Breadcrumbs  = new List<BreadcrumbItem>()
+        private List<BreadcrumbItem> _BreadcrumbItems = new List<BreadcrumbItem>()
         {
-            new BreadcrumbItem("Home" , "/index"),
-            new BreadcrumbItem("Plans" ,"/plans" , true )
+            new BreadcrumbItem("Home", "/"),
+            new BreadcrumbItem("Plans","plans"),
+            new BreadcrumbItem("Create","plans/form",true)
         };
+
     }
 }
