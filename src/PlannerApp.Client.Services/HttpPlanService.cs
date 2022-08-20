@@ -53,6 +53,16 @@ namespace PlannerApp.Client.Services
             }
         }
 
+        public async Task DeletePlanAsync(string id)
+        {
+            var response = await _httpClient.DeleteAsync($"/api/v2/Plans/{id}");
+            if(!response.IsSuccessStatusCode)
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
+                throw new ApiException(errorResponse, response.StatusCode);
+            }
+        }
+
         public async Task<ApiResponse<PlanDetails>> GetPlanById(string id)
         {
             var response = await _httpClient.GetAsync($"/api/v2/Plans/{id}");

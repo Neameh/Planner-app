@@ -17,5 +17,7 @@ namespace PlannerApp.Client.Services.Interfaces
 
         Task<ApiResponse<PlanDetails>> GetPlanById(string Id);
 
+        Task DeletePlanAsync(string Id);
+
     }
 }
