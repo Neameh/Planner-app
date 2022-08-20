@@ -1,7 +1,7 @@
 ﻿@namespace PlannerApp.Components
 
 <EditForm OnValidSubmit="OnSubmitFormAsync" Model="_model">
-    <FluentValidationValidator/>
+    <FluentValidationValidator />
     <MudText Typo="Typo.h6">Create a new Plan</MudText>
 
     <MudTextField Label="Title" HelperText="Required" Variant="Variant.Outlined" @bind-Value="_model.title" />
@@ -13,6 +13,10 @@
             Icon="@Icons.Filled.Image"
             Label="Load picture"
             for="fileInput" />
+    @if (_isEdit)
+    {
+        <img src="@_model.CoverUrl" width="75" class="my-2">
+    }
     @if (_stream != null)
     {
         <MudText Typo="Typo.subtitle2">@_fileName</MudText>
@@ -23,6 +27,6 @@
     }
     <MudDivider Class="my-2"></MudDivider>
 
-    <ValidationSummary/>
-    <MudButton Color="Color.Primary" Variant="Variant.Filled" ButtonType="ButtonType.Submit" FullWidth="true">Save</MudButton>
+    <ValidationSummary />
+    <MudButton Color="Color.Primary" Variant="Variant.Filled" ButtonType="ButtonType.Submit" FullWidth="true" Disabled="_isBusy">Save</MudButton>
 </EditForm>

@@ -29,6 +29,8 @@ namespace PlannerApp.Components
     {
         [Inject]
         public IPlanService PlanService { get; set; }
+        [Inject]
+        public NavigationManager Navigation { get; set; }
 
         private bool _isBusy;
         private string _errorMessage;
@@ -64,7 +66,7 @@ namespace PlannerApp.Components
             return null;
         }
         #region Toggler
-        private bool _isPlansCardView { get; set; } // true ?
+        private bool _isPlansCardView { get; set; } = true;
 
         private void SetPlansCardView()
         {
@@ -76,7 +78,12 @@ namespace PlannerApp.Components
         }
         #endregion
 
-
+        #region Edit Plan 
+        private void EditPlan(PlanSummary plan)
+        {
+            Navigation.NavigateTo($"plans/form/{plan.id}");
+        }
+        #endregion
 
     }
 }

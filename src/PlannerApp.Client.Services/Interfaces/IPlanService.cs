@@ -15,5 +15,7 @@ namespace PlannerApp.Client.Services.Interfaces
         Task<ApiResponse<PlanDetails>> CreatePlanAsync(PlanDetails model, FormFile coverFile );
         Task<ApiResponse<PlanDetails>> EditPlanAsync(PlanDetails model, FormFile coverFile);
 
+        Task<ApiResponse<PlanDetails>> GetPlanById(string Id);
+
     }
 }

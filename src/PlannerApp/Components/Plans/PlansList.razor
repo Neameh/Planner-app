@@ -7,11 +7,11 @@
 
 @if(_isPlansCardView)
 {
-    <PlanCardsList FetchPlans="GetPlansAsync"></PlanCardsList>
+    <PlanCardsList FetchPlans="GetPlansAsync" OnEditClicked="EditPlan"></PlanCardsList>
 }
 else
 {
-    <PlansTable />
+    <PlansTable OnEditClicked="EditPlan" />
 
 }
 

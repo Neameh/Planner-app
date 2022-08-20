@@ -1,9 +1,10 @@
 ﻿@page "/plans/form"
+@page "/plans/form/{id}"
 
 <PALayout Title="Create/Edit Plan" Breadcrumbs="_BreadcrumbItems">
     <MudGrid>
         <MudItem lg="6" md="8" sm="12">
-            <PlanForm>
+            <PlanForm Id="@Id"> 
             </PlanForm>
         </MudItem>
     </MudGrid>
