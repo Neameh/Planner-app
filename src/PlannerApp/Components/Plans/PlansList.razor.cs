@@ -22,6 +22,7 @@ using Blazored.FluentValidation;
 using PlannerApp.Client.Services.Interfaces;
 using PlannerApp.Client.Services.Exceptions;
 using PlannerApp.Shared.Models;
+using static MudBlazor.CategoryTypes;
 
 namespace PlannerApp.Components
 {
@@ -29,6 +30,8 @@ namespace PlannerApp.Components
     {
         [Inject]
         public IPlanService PlanService { get; set; }
+        [Inject]
+        public IDialogService DialogService { get; set; }
         [Inject]
         public NavigationManager Navigation { get; set; }
 
@@ -39,19 +42,19 @@ namespace PlannerApp.Components
         private string _query = string.Empty;
 
         private List<PlanSummary> _plans = new List<PlanSummary>();
-        public async Task<PagedList<PlanSummary>> GetPlansAsync(string query = "", int pageNumber = 1 , int pageSize = 10)
+        public async Task<PagedList<PlanSummary>> GetPlansAsync(string query = "", int pageNumber = 1, int pageSize = 10)
         {
             _isBusy = true;
             try
             {
-                var result =await PlanService.GetPlanSync(query, pageNumber, pageSize);
+                var result = await PlanService.GetPlanSync(query, pageNumber, pageSize);
                 _plans = result.Value.Records.ToList();
                 _pageNumber = result.Value.Page;
                 _pageSize = result.Value.PageSize;
 
                 return result.Value;
             }
-            catch(ApiException ex)
+            catch (ApiException ex)
             {
                 _errorMessage = ex.ApiErrorResponse.Message;
                 Console.WriteLine(_errorMessage);
@@ -85,5 +88,27 @@ namespace PlannerApp.Components
         }
         #endregion
 
+        #region Delete Plan
+        private async Task DeletePlanAsync(PlanSummary plan)
+        {
+            var parameters = new DialogParameters();
+            parameters.Add("ContentText", $"Are you sure you want to delete this {plan.title}");
+            parameters.Add("ButtonText", "Delete");
+            parameters.Add("Color", Color.Error);
+
+            var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+
+            var dialog = DialogService.Show<ConfirmationDialog>("Delete", parameters, options);
+
+            var Confirmationresult = await dialog.Result;
+
+            if (!Confirmationresult.Cancelled)
+            {
+                // Remove the plan
+                await PlanService.DeletePlanAsync(plan.id);
+            }
+            #endregion
+
+        }
     }
 }
