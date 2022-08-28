@@ -20,6 +20,7 @@ using System.Security.Claims;
 using PlannerApp.Shared.Components;
 using Blazored.FluentValidation;
 using PlannerApp.Shared.Models;
+using AKSoftware.Blazor.Utilities;
 
 namespace PlannerApp.Components
 {
@@ -49,6 +50,14 @@ namespace PlannerApp.Components
             _isBusy = true;
             _result = await FetchPlans?.Invoke(_query, _pageNumber, _pageSize);
             _isBusy = false;
+        }
+        protected override void OnInitialized()
+        {
+            MessagingCenter.Subscribe<PlansList, PlanSummary>(this, "Plan_deleted", async (sernder, args) =>
+            {
+                await GetPlans(_pageNumber);
+                StateHasChanged();
+            });
         }
 
         [Parameter]

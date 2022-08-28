@@ -23,6 +23,7 @@ using PlannerApp.Client.Services.Interfaces;
 using PlannerApp.Client.Services.Exceptions;
 using PlannerApp.Shared.Models;
 using static MudBlazor.CategoryTypes;
+using AKSoftware.Blazor.Utilities;
 
 namespace PlannerApp.Components
 {
@@ -89,6 +90,7 @@ namespace PlannerApp.Components
         #endregion
 
         #region Delete Plan
+        // Exciting in Doumentation of MudBlazor 
         private async Task DeletePlanAsync(PlanSummary plan)
         {
             var parameters = new DialogParameters();
@@ -104,8 +106,24 @@ namespace PlannerApp.Components
 
             if (!Confirmationresult.Cancelled)
             {
-                // Remove the plan
-                await PlanService.DeletePlanAsync(plan.id);
+                try
+                {
+                    // Remove the plan
+                    await PlanService.DeletePlanAsync(plan.id);
+
+                    // Send a message About the deleted plan
+                    MessagingCenter.Send(this,"Plan_deleted",plan);
+                }
+                catch(ApiException ex)
+                {
+                    //TO DO : Log this error
+                }
+                catch (Exception ex)
+                {
+
+                    //TO DO : Log this error 
+                }
+              
             }
             #endregion
 

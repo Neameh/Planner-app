@@ -21,6 +21,7 @@ using PlannerApp.Shared.Components;
 using Blazored.FluentValidation;
 using PlannerApp.Client.Services.Interfaces;
 using PlannerApp.Shared.Models;
+using AKSoftware.Blazor.Utilities;
 
 namespace PlannerApp.Components
 {
@@ -38,6 +39,15 @@ namespace PlannerApp.Components
         private string _query = string.Empty;
         private MudTable<PlanSummary> _table; // what this ? 
 
+        protected override void OnInitialized()
+        {
+            MessagingCenter.Subscribe<PlansList,PlanSummary>(this,"Plan_deleted",async (sender,args) =>
+            {
+                await _table.ReloadServerData();
+                StateHasChanged();
+            }
+            );
+        }
         private async Task<TableData<PlanSummary>> ServerReloadAsync(TableState state)
         {
             var result = await PlanService.GetPlanSync(_query,state.Page,state.PageSize);
