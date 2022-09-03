@@ -128,5 +128,17 @@ namespace PlannerApp.Components
             #endregion
 
         }
+
+        #region View Plan
+        // It is the same of Delete Plan But we have some changes 
+        private void ViewPlan(PlanSummary plan)
+        {
+            var parameters = new DialogParameters();
+            parameters.Add("PlanId", plan.id);
+
+            var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
+            var dialog = DialogService.Show<PlanDetailsDialog>("Show", parameters,options);
+        } 
+        #endregion
     }
 }

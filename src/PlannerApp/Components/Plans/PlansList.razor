@@ -5,13 +5,19 @@
 <MudIconButton Icon="@Icons.Material.Filled.TableView" OnClick="SetPlansCardView" Color="Color.Primary" Disabled="_isPlansCardView"></MudIconButton>
 <MudIconButton Icon="@Icons.Material.Filled.GridView" OnClick="SetPlansListView" Disabled="@(!_isPlansCardView)"></MudIconButton>
 
-@if(_isPlansCardView)
+@if (_isPlansCardView)
 {
-    <PlanCardsList FetchPlans="GetPlansAsync" OnEditClicked="EditPlan" OnDeletClicked="DeletePlanAsync"></PlanCardsList>
+    <PlanCardsList FetchPlans="GetPlansAsync"
+               OnEditClicked="EditPlan"
+               OnDeletClicked="DeletePlanAsync"
+               OnViewClicked="ViewPlan" />
+
 }
 else
 {
-    <PlansTable OnEditClicked="EditPlan" OnDeleteClicked="DeletePlanAsync" />
+    <PlansTable OnEditClicked="EditPlan"
+            OnDeleteClicked="DeletePlanAsync"
+            OnViewClicked="ViewPlan" />
 
 
 }

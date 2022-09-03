@@ -64,5 +64,8 @@ namespace PlannerApp.Components
         public EventCallback<PlanSummary> OnEditClicked { get; set; }
         [Parameter]
         public EventCallback<PlanSummary> OnDeletClicked { get; set; }
+
+        [Parameter]
+        public EventCallback<PlanSummary> OnViewClicked { get; set; }
     }
 }
