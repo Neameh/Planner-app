@@ -73,5 +73,11 @@ namespace PlannerApp.Components
         {
             MudDialog.Cancel();
         }
+
+        private void OnToDoItemAddedCallback(ToDoItems toDoItems)
+        {
+            Console.WriteLine(toDoItems.Id);
+            Console.WriteLine(toDoItems.Description);
+        }
     }
 }

@@ -1,0 +1,24 @@
+﻿@namespace PlannerApp.Components
+
+
+<div class="d-flex flex-grow-1 gap-4 mt-1">
+    @if (_isBusy)
+    {
+        <MudProgressCircular Color="Color.Info" Indeterminate="true" />
+    }
+    else
+    {
+        <MudTextField @bind-Value="_description"
+        Variant="Variant.Outlined"
+        Label="Add description for TO Do Item here" 
+        Placeholder="Going to English Session"
+        Error="@(!string.IsNullOrEmpty(_errorMessage))"
+        ErrorText="@_errorMessage"
+        Required="true"
+        RequiredError="To DO Item Description is Required"
+        Class="flex-shrink-1 m-4" Width="100%" />
+
+        <MudIconButton Icon="@Icons.Material.Filled.Add" Color="Color.Success" Class="flex-none" @onclick="AddItem" />
+    }
+
+</div>
